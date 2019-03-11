@@ -313,6 +313,16 @@ extension HashtagView: RemovableHashtagDelegate {
         removeTag(tag: hashtag)
         self.delegate?.hashtagRemoved(hashtag: hashtag)
     }
+    public func onSelectHashtag(hashtag: HashTag) {
+        self.delegate?.selectedHashtag(hashtag: hashtag)
+    }
+}
+
+extension HashtagView: HashtagDelegate {
+   
+    public  func onSelectHashtag(hashtag: HashTag){
+        self.delegate?.selectedHashtag(hashtag: hashtag)
+    }
 }
 
 extension HashtagView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -333,14 +343,9 @@ extension HashtagView: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashtagCollectionViewCell.cellIdentifier,
                                                       for: indexPath) as! HashtagCollectionViewCell
-
+        cell.delegate = self
         cell.configureWithTag(tag: hashtag, configuration: makeConfiguration())
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let hashtag: HashTag = self.hashtags[indexPath.item]
-        self.delegate?.selectedHashtag(hashtag: hashtag)
     }
 }
 
