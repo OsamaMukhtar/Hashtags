@@ -330,14 +330,14 @@ extension HashtagView: UICollectionViewDelegate, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let hashtag: HashTag = self.hashtags[indexPath.item]
         
-        if hashtag.isRemovable {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RemovableHashtagCollectionViewCell.cellIdentifier,
-                                                          for: indexPath) as! RemovableHashtagCollectionViewCell
-            
-            cell.delegate = self
-            cell.configureWithTag(tag: hashtag, configuration: makeConfiguration())
-            return cell
-        }
+//        if hashtag.isRemovable {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RemovableHashtagCollectionViewCell.cellIdentifier,
+//                                                          for: indexPath) as! RemovableHashtagCollectionViewCell
+//            
+//            cell.delegate = self
+//            cell.configureWithTag(tag: hashtag, configuration: makeConfiguration())
+//            return cell
+//        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashtagCollectionViewCell.cellIdentifier,
                                                       for: indexPath) as! HashtagCollectionViewCell
         cell.delegate = self
