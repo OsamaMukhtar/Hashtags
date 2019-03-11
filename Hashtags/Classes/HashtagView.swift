@@ -313,9 +313,6 @@ extension HashtagView: RemovableHashtagDelegate {
         removeTag(tag: hashtag)
         self.delegate?.hashtagRemoved(hashtag: hashtag)
     }
-    public func onSelectHashtag(hashtag: HashTag) {
-        self.delegate?.selectedHashtag(hashtag: hashtag)
-    }
 }
 
 extension HashtagView: HashtagDelegate {

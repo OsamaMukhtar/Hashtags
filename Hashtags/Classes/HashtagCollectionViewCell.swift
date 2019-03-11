@@ -49,7 +49,7 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         
         self.addSubview(wordLabel)
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.selectedHashtag(_:)))
-        self.contentView.addGestureRecognizer()
+        self.contentView.addGestureRecognizer(tap)
         // Padding left
         self.paddingLeftConstraint = self.wordLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         self.paddingLeftConstraint!.isActive = true
@@ -64,8 +64,9 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         self.paddingRightConstraint!.isActive = true
     }
     
-    @objc func selectedHashtag{
-        self.delegate?.onSelectHashtag(hashtag: self.hashtag)
+    @objc func selectedHashtag(_ sender: UITapGestureRecognizer? = nil)  {
+        // handling code
+        self.delegate?.onSelectHashtag(hashtag: self.hashtag!)
     }
     open override func prepareForInterfaceBuilder() {
         self.wordLabel.text = ""
