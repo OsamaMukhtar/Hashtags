@@ -87,6 +87,8 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = configuration.backgroundColor
         
         self.wordLabel.textColor = configuration.textColor
+        self.layer.borderWidth = configuration.borderWidth
+        self.layer.borderColor = configuration.borderColor.cgColor
         self.wordLabel.font = UIFont.systemFont(ofSize: configuration.textSize)
     }
 }

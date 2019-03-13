@@ -124,7 +124,17 @@ open class HashtagView: UIView {
             self.collectionView.reloadData()
         }
     }
+    open var tagBorderColor: UIColor = .clear {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
+    open var tagBorderWidth: CGFloat = 0.0 {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     
     @IBInspectable
     open var removeButtonSize: CGFloat = 10.0 {
@@ -212,7 +222,8 @@ open class HashtagView: UIView {
         configuration.cornerRadius = self.tagCornerRadius
         configuration.textSize = self.textSize
         configuration.textColor = self.tagTextColor
-        
+        configuration.borderColor = self.tagBorderColor
+        configuration.borderWidth = self.tagBorderWidth
         return configuration
     }
     
