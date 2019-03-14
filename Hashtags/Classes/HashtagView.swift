@@ -112,7 +112,19 @@ open class HashtagView: UIView {
     }
     
     @IBInspectable
+    open var tagBorderColorPrimary: UIColor = .lightGray {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    
     open var tagBackgroundColor: UIColor = .lightGray {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    open var tagBorderColor: UIColor = .lightGray {
         didSet {
             self.collectionView.reloadData()
         }
@@ -124,7 +136,7 @@ open class HashtagView: UIView {
             self.collectionView.reloadData()
         }
     }
-    open var tagBorderColor: UIColor = .clear {
+    open var tagBorderColorSecondary: UIColor = .clear {
         didSet {
             self.collectionView.reloadData()
         }
@@ -183,10 +195,10 @@ open class HashtagView: UIView {
     
     override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-
-        self.addTag(tag: HashTag(word: "hashtag"))
-        self.addTag(tag: HashTag(word: "hashtag", withHashSymbol: true, isRemovable: false))
-        self.addTag(tag: HashTag(word: "RemovableHashtag", isRemovable: true))
+//
+//        self.addTag(tag: HashTag(word: "hashtag"))
+//        self.addTag(tag: HashTag(word: "hashtag", withHashSymbol: true, isRemovable: false))
+//        self.addTag(tag: HashTag(word: "RemovableHashtag", isRemovable: true))
     }
 
     open override var intrinsicContentSize: CGSize {
@@ -222,7 +234,8 @@ open class HashtagView: UIView {
         configuration.cornerRadius = self.tagCornerRadius
         configuration.textSize = self.textSize
         configuration.textColor = self.tagTextColor
-        configuration.borderColor = self.tagBorderColor
+        configuration.borderColorPrimary = self.tagBorderColorPrimary
+        configuration.borderColorSecondary = self.tagBorderColorSecondary
         configuration.borderWidth = self.tagBorderWidth
         return configuration
     }

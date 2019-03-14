@@ -84,11 +84,18 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         self.paddingRightConstraint!.constant = -1 * configuration.paddingRight
 
         self.layer.cornerRadius = configuration.cornerRadius
+        if(tag.type == .Location)
+        {
+             self.layer.borderColor = configuration.borderColorPrimary.cgColor
+        }
+        else
+        {
+            self.layer.borderColor = configuration.borderColorSecondary.cgColor
+        }
         self.backgroundColor = configuration.backgroundColor
         
         self.wordLabel.textColor = configuration.textColor
         self.layer.borderWidth = configuration.borderWidth
-        self.layer.borderColor = configuration.borderColor.cgColor
         self.wordLabel.font = UIFont.systemFont(ofSize: configuration.textSize)
     }
 }

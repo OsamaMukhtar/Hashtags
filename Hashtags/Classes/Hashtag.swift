@@ -7,7 +7,10 @@
 //
 
 import Foundation
-
+public enum HastagType {
+    case Location
+    case WikiLink
+}
 extension Array where Element: Equatable {
     @discardableResult mutating func remove(object: Element) -> Bool {
         if let index = index(of: object) {
@@ -33,9 +36,10 @@ open class HashTag: Equatable {
     open var text: String
     open var isRemovable: Bool
     open var hasHashSymbol: Bool
+    open var type: HastagType
     open var configuration: HashtagConfiguration?
     
-    public init(word: String, withHashSymbol: Bool = true, isRemovable: Bool = false) {
+    public init(word: String, withHashSymbol: Bool = true, isRemovable: Bool = false, type : HastagType) {
         self.text = word
         self.isRemovable = isRemovable
         self.hasHashSymbol = withHashSymbol
@@ -43,6 +47,7 @@ open class HashTag: Equatable {
         if hasHashSymbol {
             self.text = "#" + text
         }
+        self.type = type;
     }
     
     public static func == (lhs: HashTag, rhs: HashTag) -> Bool {
