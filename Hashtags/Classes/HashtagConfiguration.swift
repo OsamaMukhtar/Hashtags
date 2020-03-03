@@ -17,7 +17,7 @@ open class HashtagConfiguration {
     var cornerRadius: CGFloat = 0.0
     var textSize: CGFloat = 0.0
     var textColor = UIColor()
-    var backgroundColor = UIColor()
+    var backgroundColor = [UIColor()]
     var borderColorPrimary = UIColor()
     var borderColorSecondary = UIColor()
     var borderWidth : CGFloat = 0.0

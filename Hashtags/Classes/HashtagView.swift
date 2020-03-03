@@ -118,7 +118,7 @@ open class HashtagView: UIView {
         }
     }
     
-    open var tagBackgroundColor: UIColor = .lightGray {
+    open var tagBackgroundColor: [UIColor] = [.lightGray] {
         didSet {
             self.collectionView.reloadData()
         }

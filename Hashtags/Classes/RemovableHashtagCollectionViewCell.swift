@@ -120,7 +120,7 @@ extension RemovableHashtagCollectionViewCell {
         self.removeButtonWidthConstraint!.constant = configuration.removeButtonSize
         
         self.layer.cornerRadius = configuration.cornerRadius
-        self.backgroundColor = configuration.backgroundColor
+        self.backgroundColor = configuration.backgroundColor.randomElement()
         
         self.wordLabel.textColor = configuration.textColor
         self.wordLabel.font = UIFont.systemFont(ofSize: configuration.textSize)

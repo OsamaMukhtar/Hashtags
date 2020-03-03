@@ -92,7 +92,7 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         {
             self.layer.borderColor = configuration.borderColorSecondary.cgColor
         }
-        self.backgroundColor = configuration.backgroundColor
+        self.backgroundColor = configuration.backgroundColor.randomElement()
         
         self.wordLabel.textColor = configuration.textColor
         self.layer.borderWidth = configuration.borderWidth
