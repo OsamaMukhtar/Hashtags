@@ -77,8 +77,16 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         self.paddingRightConstraint!.constant = -1 * configuration.paddingRight
 
         self.layer.cornerRadius = configuration.cornerRadius
-
-        self.backgroundColor = configuration.backgroundColor[configuration.backgroundColor.count % (index! + 1)]
+        
+        var randomColorIndex = index!.remainderReportingOverflow(dividingBy: configuration.backgroundColor.count).partialValue
+        if randomColorIndex < 0
+        {
+            randomColorIndex = 0
+        }
+        else if randomColorIndex >= configuration.backgroundColor.count {
+            randomColorIndex = configuration.backgroundColor.count - 1
+        }
+        self.backgroundColor = configuration.backgroundColor[randomColorIndex]
         
         self.wordLabel.textColor = configuration.textColor
         self.layer.borderWidth = configuration.borderWidth
