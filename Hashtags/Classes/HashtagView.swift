@@ -18,6 +18,7 @@ open class HashtagView: UIView {
     
     private var lastDimension: CGSize?
     
+    private var selectedCellIndex : Int = 1000
     private var originalHeight: CGFloat?
     
     lazy var collectionView: UICollectionView = {
@@ -350,7 +351,12 @@ extension HashtagView: UICollectionViewDelegate, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.hashtags.count
     }
-
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCellIndex = indexPath.row
+        let cell = collectionView.cellForItem(at: indexPath) as! HashtagCollectionViewCell
+        cell.delegate?.onSelectHashtag(hashtag: cell.hashtag!)
+        self.collectionView.reloadData()
+    }
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let hashtag: HashTag = self.hashtags[indexPath.item]
         
@@ -365,6 +371,15 @@ extension HashtagView: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashtagCollectionViewCell.cellIdentifier,
                                                       for: indexPath) as! HashtagCollectionViewCell
         cell.delegate = self
+        if indexPath.row == selectedCellIndex {
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = UIColor.white.cgColor
+        }
+        else {
+            cell.layer.borderWidth = 0
+            cell.layer.borderColor = UIColor.clear.cgColor
+        }
+        cell.index = indexPath.row
         cell.configureWithTag(tag: hashtag, configuration: makeConfiguration())
         return cell
     }

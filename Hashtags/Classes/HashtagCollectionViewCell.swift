@@ -22,7 +22,7 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
     var paddingRightConstraint: NSLayoutConstraint?
     var paddingTopConstraint: NSLayoutConstraint?
     var paddingBottomConstraint: NSLayoutConstraint?
-    
+    var index : Int?
     lazy var wordLabel : UILabel = {
         let lbl = UILabel()
         lbl.textColor = UIColor.white
@@ -63,10 +63,6 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         self.paddingRightConstraint!.isActive = true
     }
     
-    @objc func selectedHashtag(_ sender: UITapGestureRecognizer? = nil)  {
-        // handling code
-        self.delegate?.onSelectHashtag(hashtag: self.hashtag!)
-    }
     open override func prepareForInterfaceBuilder() {
         self.wordLabel.text = ""
         super.prepareForInterfaceBuilder()
@@ -75,24 +71,14 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
     open func configureWithTag(tag: HashTag, configuration: HashtagConfiguration) {
         self.hashtag = tag
         wordLabel.text = tag.text
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.selectedHashtag(_:)))
-        self.wordLabel.addGestureRecognizer(tap)
-        wordLabel.isUserInteractionEnabled = true
         self.paddingLeftConstraint!.constant = configuration.paddingLeft
         self.paddingTopConstraint!.constant = configuration.paddingTop
         self.paddingBottomConstraint!.constant = -1 * configuration.paddingBottom
         self.paddingRightConstraint!.constant = -1 * configuration.paddingRight
 
         self.layer.cornerRadius = configuration.cornerRadius
-        if(tag.type == .Location)
-        {
-             self.layer.borderColor = configuration.borderColorPrimary.cgColor
-        }
-        else
-        {
-            self.layer.borderColor = configuration.borderColorSecondary.cgColor
-        }
-        self.backgroundColor = configuration.backgroundColor.randomElement()
+
+        self.backgroundColor = configuration.backgroundColor[configuration.backgroundColor.count % (index! + 1)]
         
         self.wordLabel.textColor = configuration.textColor
         self.layer.borderWidth = configuration.borderWidth
