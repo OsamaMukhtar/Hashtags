@@ -11,6 +11,14 @@ public enum HastagType {
     case Location
     case WikiLink
 }
+
+public enum HashtagSubType {
+    case Location
+    case Organization
+    case Product
+    case Person
+    case Others
+}
 extension Array where Element: Equatable {
     @discardableResult mutating func remove(object: Element) -> Bool {
         if let index = index(of: object) {
@@ -37,13 +45,14 @@ open class HashTag: Equatable {
     open var isRemovable: Bool
     open var hasHashSymbol: Bool
     open var type: HastagType
+    open var subtype : HashtagSubType
     open var configuration: HashtagConfiguration?
     
-    public init(word: String, withHashSymbol: Bool = true, isRemovable: Bool = false, type : HastagType) {
+    public init(word: String, withHashSymbol: Bool = true, isRemovable: Bool = false, type : HastagType, subtype : HashtagSubType) {
         self.text = word
         self.isRemovable = isRemovable
         self.hasHashSymbol = withHashSymbol
-        
+        self.subtype = subtype
         if hasHashSymbol {
             self.text = "#" + text
         }

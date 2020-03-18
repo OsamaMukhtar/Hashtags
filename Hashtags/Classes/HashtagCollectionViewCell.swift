@@ -77,6 +77,12 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         self.paddingRightConstraint!.constant = -1 * configuration.paddingRight
 
         self.layer.cornerRadius = configuration.cornerRadius
+        self.layer.masksToBounds  = false
+        // shadow
+         self.layer.shadowColor = UIColor.black.cgColor
+         self.layer.shadowOffset = CGSize(width: 0, height: 2)
+         self.layer.shadowOpacity = 0.3
+         self.layer.shadowRadius = 2
         
         var randomColorIndex = index!.remainderReportingOverflow(dividingBy: configuration.backgroundColor.count).partialValue
         if randomColorIndex < 0
@@ -86,8 +92,21 @@ open class HashtagCollectionViewCell: UICollectionViewCell {
         else if randomColorIndex >= configuration.backgroundColor.count {
             randomColorIndex = configuration.backgroundColor.count - 1
         }
-        self.backgroundColor = configuration.backgroundColor[randomColorIndex]
         
+        switch hashtag?.subtype {
+        case .Others:
+            self.backgroundColor = configuration.backgroundColor[0]
+        case .Product:
+            self.backgroundColor = configuration.backgroundColor[1]
+        case .Location:
+            self.backgroundColor = configuration.backgroundColor[2]
+        case .Person:
+            self.backgroundColor = configuration.backgroundColor[3]
+        case .Organization:
+            self.backgroundColor = configuration.backgroundColor[4]
+        default:
+            self.backgroundColor = configuration.backgroundColor[randomColorIndex]
+        }
         self.wordLabel.textColor = configuration.textColor
         self.layer.borderWidth = configuration.borderWidth
         self.wordLabel.font = UIFont.systemFont(ofSize: configuration.textSize)
